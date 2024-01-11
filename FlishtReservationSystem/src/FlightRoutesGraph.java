@@ -8,13 +8,6 @@ public class FlightRoutesGraph {
         routes = new HashMap<>();;
         airports = new HashMap<>();
     }
-    
-
-/*    // Method to add a flight route
-    	public void addRoute(FlightRoute route) {
-        routes.putIfAbsent(route.getSourceAirport(), new ArrayList<>());
-        routes.get(route.getSourceAirport()).add(route);
-    }*/
 
     // Method to delete a flight route
     public void deleteRoute(FlightRoute route) {
@@ -73,6 +66,27 @@ public class FlightRoutesGraph {
     public static int getNumberOfBookings(FlightRoute route) {
         return route.getNumberOfBookings();
     }
+    /*
+    public Map<String, List<FlightRoute>> getRoutes() {
+        return routes;
+    }
+    
+    public static List<FlightRoute> getAllRoutes(FlightRoutesGraph flightRoutesGraph) {
+        List<FlightRoute> allRoutes = new ArrayList<>();
+        for (List<FlightRoute> routeList : flightRoutesGraph.getRoutes().values()) {
+            allRoutes.addAll(routeList);
+        }
+        return allRoutes;
+    }*/
+    
+    public List<FlightRoute> getAllRoutes() {
+        List<FlightRoute> allRoutes = new ArrayList<>();
+        for (List<FlightRoute> routeList : this.routes.values()) {
+            allRoutes.addAll(routeList);
+        }
+        return allRoutes;
+    }
+    
     
     public static void searchForFlight(FlightRoutesGraph flightRoutesGraph, String source, String destination) {
         List<FlightRoute> routes = flightRoutesGraph.getRoutesFrom(source);

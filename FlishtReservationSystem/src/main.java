@@ -6,69 +6,60 @@ public class main {
         FlightRoutesGraph flightRoutesGraph = new FlightRoutesGraph();
         ReservationSystem reservationSystem = new ReservationSystem();
 
-        // Add airports
-        Airport airportA = new Airport("SKG", "Thessaloniki International Airport Macedonia", "Thessaloniki");
-        Airport airportB = new Airport("BER", "Berlin Brandenburg Airport", "Berlin");
-        Airport airportC = new Airport("SKP", "Skopje International Airport", "Skopje");
-        Airport airportD = new Airport("LHR", "Heathrow Airport", "London");
-        Airport airportE = new Airport("FCO", "Leonardo da Vinci–Fiumicino Airport", "Rome");
-        flightRoutesGraph.addAirport(airportA);
-        flightRoutesGraph.addAirport(airportB);
-        flightRoutesGraph.addAirport(airportC);
-        flightRoutesGraph.addAirport(airportD);
-        flightRoutesGraph.addAirport(airportE);
+     // Adding a large number of airports
+        int numberOfAirports = 10000; // for example, 100 airports
+        for (int i = 1; i <= numberOfAirports; i++) {
+            String airportCode = "AIRPORT" + i;
+            String airportName = "Airport " + i;
+            String location = "City " + i;
+            Airport airport = new Airport(airportCode, airportName, location);
+            flightRoutesGraph.addAirport(airport);
+        }
 
-        // Add flight routes
-        FlightRoute routeSKP_FCO = new FlightRoute("SKP", "FCO", "08:00", 1.0); // 1 hours duration
-        FlightRoute routeFCO_SKG = new FlightRoute("FCO", "SKG", "10:00", 1.5); 
-        FlightRoute routeSKG_LHR = new FlightRoute("SKG", "LHR", "09:00", 3.0); 
-        FlightRoute routeLHR_BER = new FlightRoute("LHR", "BER", "15:00", 1.0);	
-        flightRoutesGraph.addRoute(routeSKP_FCO);
-        flightRoutesGraph.addRoute(routeFCO_SKG);
-        flightRoutesGraph.addRoute(routeSKG_LHR);
-        flightRoutesGraph.addRoute(routeLHR_BER);
+        // Adding flight routes between these airports
+        int numberOfRoutes = 50000; // for example, 500 routes
+        for (int i = 1; i <= numberOfRoutes; i++) {
+            String source = "AIRPORT" + (i % numberOfAirports + 1); // To cycle through airports
+            String destination = "AIRPORT" + ((i + 1) % numberOfAirports + 1); // To ensure different destination
+            String timing = "08:00";
+            double duration = 2.0;
+            FlightRoute route = new FlightRoute(source, destination, timing, duration);
+            flightRoutesGraph.addRoute(route);
+        }
 
-        // Add reservations
-        Passenger passenger1 = new Passenger("John Doe", "P123456");
-        Passenger passenger2 = new Passenger("Jane Doe", "P654321");
-        Passenger passenger3 = new Passenger("Jane Doae", "P654321");
-        Passenger passenger4 = new Passenger("Jane Doe", "P6543d21");
-        Passenger passenger5 = new Passenger("Jane Doae", "P65421a");
-        Passenger passenger6 = new Passenger("Jane Doe", "P654321");
-        Passenger passenger7 = new Passenger("Jane Doae", "P654321");
-        Passenger passenger8 = new Passenger("Jane Doe", "P654321");
-        Passenger passenger9 = new Passenger("Jane Doae", "P654321");
-        Passenger passenger10 = new Passenger("Jane Doe", "P6543d21");
-        Passenger passenger11 = new Passenger("Jane Doe", "P654321");
-        Passenger passenger12 = new Passenger("Jane Doe", "P654322");
-        reservationSystem.bookReservation(passenger1, routeSKP_FCO); 
-        reservationSystem.bookReservation(passenger2, routeFCO_SKG); 
-        reservationSystem.bookReservation(passenger3, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger4, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger5, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger6, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger7, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger8, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger9, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger10, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger11, routeFCO_SKG);
-        reservationSystem.bookReservation(passenger12, routeFCO_SKG);
-
+        // Making some reservations
+        int numberOfReservations = 10000; // for example, 100 reservations
+        for (int i = 1; i <= numberOfReservations; i++) {
+            Passenger passenger = new Passenger("Passenger " + i, "P123" + i);
+            // Assuming routes are stored in a list or similar collection
+            List<FlightRoute> allRoutes = flightRoutesGraph.getAllRoutes();
+            if (!allRoutes.isEmpty()) {
+                FlightRoute route = allRoutes.get(i % allRoutes.size()); // Cycle through available routes
+                reservationSystem.bookReservation(passenger, route);
+            }
+        }
+        
         // Testing scenarios
         // 1. Search for a direct flight between AAA and BBB
-        searchForFlight(flightRoutesGraph, "SKG", "LHR");
+        searchForFlight(flightRoutesGraph, "AIRPORT450", "AIRPORT451");
 
         // 2. Search for a connecting flight from AAA to CCC via BBB
-        searchForConnectingFlight(flightRoutesGraph, "SKP", "SKG");
+        searchForConnectingFlight(flightRoutesGraph, "AIRPORT998", "AIRPORT1000");
 
         // 3. Search for a non-existent flight or a flight without available seats
-        searchForFlight(flightRoutesGraph, "FCO", "SKG");
+        searchForFlight(flightRoutesGraph, "AIRPORT455", "AIRPORT15");
 
         // Word Recommendation - implement a method for this as needed
 
         // Performance Testing - use larger data sets and measure execution time
+        long startTime = System.nanoTime();
+	    // Call the method you want to test
+	    long endTime = System.nanoTime();
+	    System.out.println("Execution time: " + (endTime - startTime) + " nanoseconds");
+
+        
     }
-    
+        
     // Methods for searchForFlight, searchForConnectingFlight, etc.
     public static void searchForFlight(FlightRoutesGraph flightRoutesGraph, String source, String destination) {
         List<FlightRoute> routes = flightRoutesGraph.getRoutesFrom(source);
