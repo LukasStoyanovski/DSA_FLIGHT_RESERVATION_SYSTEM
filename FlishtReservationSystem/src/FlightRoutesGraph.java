@@ -81,7 +81,7 @@ public class FlightRoutesGraph {
         for (FlightRoute route : routes) {
             if (route.getDestinationAirport().equals(destination)) {
                 // Assuming a method getNumberOfBookings() returns the number of bookings for this route
-                int bookings = getNumberOfBookings(route); // Implement this method
+                int bookings = getNumberOfBookings(route); 
                 if (bookings < 10) {
                     System.out.println("Flight found from " + source + " to " + destination + " with available seats.");
                     flightFound = true;
@@ -106,8 +106,8 @@ public class FlightRoutesGraph {
             List<FlightRoute> midPointRoutes = flightRoutesGraph.getRoutesFrom(midPoint);
             for (FlightRoute midPointRoute : midPointRoutes) {
                 if (midPointRoute.getDestinationAirport().equals(destination)) {
-                    int bookings1 = getNumberOfBookings(sourceRoute); // Implement this method
-                    int bookings2 = getNumberOfBookings(midPointRoute); // Implement this method
+                    int bookings1 = getNumberOfBookings(sourceRoute); 
+                    int bookings2 = getNumberOfBookings(midPointRoute); 
                     if (bookings1 < 10 && bookings2 < 10) {
                         System.out.println("Connecting flight found from " + source + " via " + midPoint + " to " + destination + " with available seats.");
                         connectingFlightFound = true;
