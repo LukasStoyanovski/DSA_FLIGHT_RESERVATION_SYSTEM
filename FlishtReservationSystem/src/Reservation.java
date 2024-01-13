@@ -8,17 +8,8 @@ public class Reservation {
     public Reservation(Passenger passenger, FlightRoute flightRoute) {
         this.passenger = passenger;
         this.flightRoute = flightRoute;
-        this.reservationId = generateReservationId();
         this.isActive = true;
-    }
-
-    // Generate a unique reservation ID (implementation depends on requirements)
-    private String generateReservationId() {
-        // Implementation
-        return "RES" + System.currentTimeMillis(); // Simplified example
-    }
-
-    
+    }  
 
     public boolean isActive() {
 		return isActive;

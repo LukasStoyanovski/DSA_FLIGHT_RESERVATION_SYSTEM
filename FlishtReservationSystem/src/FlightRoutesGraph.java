@@ -23,8 +23,6 @@ public class FlightRoutesGraph {
         addRoute(newRoute);
     }
 
-    // Method to validate airport codes (can be implemented based on specific rules)
-
     // Method to check for duplicate routes
     public boolean isDuplicateRoute(FlightRoute route) {
         List<FlightRoute> sourceRoutes = routes.get(route.getSourceAirport());
@@ -66,18 +64,6 @@ public class FlightRoutesGraph {
     public static int getNumberOfBookings(FlightRoute route) {
         return route.getNumberOfBookings();
     }
-    /*
-    public Map<String, List<FlightRoute>> getRoutes() {
-        return routes;
-    }
-    
-    public static List<FlightRoute> getAllRoutes(FlightRoutesGraph flightRoutesGraph) {
-        List<FlightRoute> allRoutes = new ArrayList<>();
-        for (List<FlightRoute> routeList : flightRoutesGraph.getRoutes().values()) {
-            allRoutes.addAll(routeList);
-        }
-        return allRoutes;
-    }*/
     
     public List<FlightRoute> getAllRoutes() {
         List<FlightRoute> allRoutes = new ArrayList<>();

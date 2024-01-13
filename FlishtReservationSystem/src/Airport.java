@@ -1,8 +1,8 @@
 public class Airport {
     private String airportCode;
     private String airportName;
-    private String location; // City, Country, etc.
-    // Other relevant fields like terminals, services, etc.
+    private String location;
+    
     
     // Constructor
     public Airport(String airportCode, String airportName, String location) {
@@ -36,5 +36,4 @@ public class Airport {
         this.location = location;
     }
 
-    // Additional methods as required
 }

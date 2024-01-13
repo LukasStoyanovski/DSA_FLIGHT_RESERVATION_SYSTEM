@@ -7,6 +7,23 @@ public class Passenger {
     public Passenger(String name, String passportNumber) {
         this.name = name;
         this.passportNumber = passportNumber;
-        // Initialize other fields
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassportNumber() {
+		return passportNumber;
+	}
+
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
+	}
+    
+    
 }
